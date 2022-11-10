@@ -24,7 +24,7 @@ export async function insertOne(req: Request, res: Response) {
         return res.status(201).send(`Movie inserted ${result.rowCount}`);
     } catch (error) {
         console.log(error);
-        return res.sendStatus(500);
+        return res.status(500).send(error.detail);
     }
 };
 
@@ -52,3 +52,19 @@ export async function updateRate(req: Request, res: Response) {
         return res.sendStatus(5000);
     }
 };
+
+export async function deleteMovie(req:Request,res:Response){
+    const id = req.params.movieId as string;
+    try {
+        const movieById = await movieRepository.findMovieById(id);
+        if( movieById.rowCount !== 1){
+            res.sendStatus(404);
+        }
+        await movieRepository.deleteUniqueMovie(id);
+        return res.status(204).send(`movie deleted`);
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send(error.detail);
+    }
+}

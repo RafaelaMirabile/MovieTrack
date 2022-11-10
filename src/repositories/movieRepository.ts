@@ -19,7 +19,15 @@ export async function updateReview(id: string, newReview: movieProtocols.Review)
     return connection.query(`UPDATE movies SET review=$1 WHERE id=$2;`, [newReview.review, id]);
 };
 
-export function updateRate(id: string, newRate: movieProtocols.Rate) {
+export async function updateRate(id: string, newRate: movieProtocols.Rate) {
     return connection.query(`UPDATE movies SET rate=$1 WHERE id=$2`, [newRate.rate, id]);
-}
+};
+export async function findMovieById(id : string) : Promise <QueryResult<movieProtocols.Movie>>{
+    return connection.query(`SELECT * FROM movies WHERE id=$1`,[id]);
+};
+
+export async function deleteUniqueMovie(id :string){
+    return connection.query(`DELETE FROM movies WHERE id=$1`,[id]);
+};
+
 
