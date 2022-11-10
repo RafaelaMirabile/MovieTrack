@@ -53,18 +53,32 @@ export async function updateRate(req: Request, res: Response) {
     }
 };
 
-export async function deleteMovie(req:Request,res:Response){
+export async function deleteMovie(req: Request, res: Response) {
     const id = req.params.movieId as string;
     try {
         const movieById = await movieRepository.findMovieById(id);
-        if( movieById.rowCount !== 1){
+        if (movieById.rowCount !== 1) {
             res.sendStatus(404);
         }
         await movieRepository.deleteUniqueMovie(id);
         return res.status(204).send(`movie deleted`);
-        
+
     } catch (error) {
         console.log(error);
         return res.status(500).send(error.detail);
     }
-}
+};
+
+export async function moviesWithSameGenre(req: Request, res: Response) {
+    const genre = req.query.genre as string;
+    try {
+        const moviesList = await movieRepository.listSameGenreMovies(genre);
+        if (moviesList.rowCount === 0) {
+            return res.status(404).send(`movies with this genre not found`);
+        }
+        return res.status(200).send(moviesList.rows);
+    } catch (error) {
+        console.log(error.detail);
+        return res.sendStatus(500);
+    }
+};

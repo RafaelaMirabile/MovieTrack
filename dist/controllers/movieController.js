@@ -79,7 +79,7 @@ export function insertOne(req, res) {
                 case 4:
                     error_2 = _a.sent();
                     console.log(error_2);
-                    return [2 /*return*/, res.sendStatus(500)];
+                    return [2 /*return*/, res.status(500).send(error_2.detail)];
                 case 5: return [2 /*return*/];
             }
         });
@@ -130,6 +130,63 @@ export function updateRate(req, res) {
                     error_4 = _a.sent();
                     console.log(error_4);
                     return [2 /*return*/, res.sendStatus(5000)];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+;
+export function deleteMovie(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var id, movieById, error_5;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    id = req.params.movieId;
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 4, , 5]);
+                    return [4 /*yield*/, movieRepository.findMovieById(id)];
+                case 2:
+                    movieById = _a.sent();
+                    if (movieById.rowCount !== 1) {
+                        res.sendStatus(404);
+                    }
+                    return [4 /*yield*/, movieRepository.deleteUniqueMovie(id)];
+                case 3:
+                    _a.sent();
+                    return [2 /*return*/, res.status(204).send("movie deleted")];
+                case 4:
+                    error_5 = _a.sent();
+                    console.log(error_5);
+                    return [2 /*return*/, res.status(500).send(error_5.detail)];
+                case 5: return [2 /*return*/];
+            }
+        });
+    });
+}
+;
+export function moviesWithSameGenre(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var genre, moviesList, error_6;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    genre = req.query.genre;
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, movieRepository.listSameGenreMovies(genre)];
+                case 2:
+                    moviesList = _a.sent();
+                    if (moviesList.rowCount === 0) {
+                        return [2 /*return*/, res.status(404).send("movies with this genre not found")];
+                    }
+                    return [2 /*return*/, res.status(200).send(moviesList.rows)];
+                case 3:
+                    error_6 = _a.sent();
+                    console.log(error_6.detail);
+                    return [2 /*return*/, res.sendStatus(500)];
                 case 4: return [2 /*return*/];
             }
         });

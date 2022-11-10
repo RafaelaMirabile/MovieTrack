@@ -70,5 +70,33 @@ export function updateReview(id, newReview) {
 }
 ;
 export function updateRate(id, newRate) {
-    return connection.query("UPDATE movies SET rate=$1 WHERE id=$2", [newRate.rate, id]);
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, connection.query("UPDATE movies SET rate=$1 WHERE id=$2", [newRate.rate, id])];
+        });
+    });
+}
+;
+export function findMovieById(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, connection.query("SELECT * FROM movies WHERE id=$1", [id])];
+        });
+    });
+}
+;
+export function deleteUniqueMovie(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, connection.query("DELETE FROM movies WHERE id=$1", [id])];
+        });
+    });
+}
+;
+export function listSameGenreMovies(genre) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, connection.query("SELECT * FROM movies WHERE genre=$1", [genre])];
+        });
+    });
 }

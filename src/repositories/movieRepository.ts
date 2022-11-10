@@ -30,4 +30,8 @@ export async function deleteUniqueMovie(id :string){
     return connection.query(`DELETE FROM movies WHERE id=$1`,[id]);
 };
 
+export async function listSameGenreMovies(genre: string): Promise<QueryResult<movieProtocols.Movie>>{
+    return connection.query(`SELECT * FROM movies WHERE genre=$1`,[genre]);
+}
+
 
