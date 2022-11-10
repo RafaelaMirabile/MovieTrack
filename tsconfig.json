@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
         "outDir": "dist", 
-        "esModuleInterop": true, //diferentes tipos de importacao
+        "esModuleInterop": true, 
         "module": "es6",
-        "moduleResolution":"Node" //pg
+        "moduleResolution":"Node" 
     },
     "ts-node": {
         "esm": true
