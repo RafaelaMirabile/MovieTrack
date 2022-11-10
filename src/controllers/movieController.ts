@@ -1,4 +1,5 @@
 import { Response, Request } from "express";
+import { string } from "joi";
 import * as movieProtocols from '../protocols/movieProtocols.js'
 import * as movieRepository from '../repositories/movieRepository.js'
 
@@ -31,6 +32,7 @@ export async function insertOne(req: Request, res: Response) {
 export async function writeReview(req: Request, res: Response) {
     const id = req.params.movieId as string;
     const newReview = req.body.review as string;
+    findMovieById(req,res,id);
     try {
         await movieRepository.updateReview(id, newReview);
         return res.status(200).send(`review updated successfully`);
@@ -43,6 +45,7 @@ export async function writeReview(req: Request, res: Response) {
 export async function updateRate(req: Request, res: Response) {
     const id = req.params.movieId as string;
     const newRate = req.body.rate as string;
+    findMovieById(req,res,id);
     try {
         await movieRepository.updateRate(id, newRate);
         return res.status(200).send(`rate updated successfully`);
@@ -55,15 +58,11 @@ export async function updateRate(req: Request, res: Response) {
 
 export async function deleteMovie(req: Request, res: Response) {
     const id = req.params.movieId as string;
+    findMovieById(req,res,id);
     try {
-        const movieById = await movieRepository.findMovieById(id);
-        if (movieById.rowCount !== 1) {
-            res.sendStatus(404);
-        }
         await movieRepository.deleteUniqueMovie(id);
         return res.status(204).send(`movie deleted`);
-
-    } catch (error) {
+        } catch (error) {
         console.log(error);
         return res.status(500).send(error.detail);
     }
@@ -82,3 +81,10 @@ export async function moviesWithSameGenre(req: Request, res: Response) {
         return res.sendStatus(500);
     }
 };
+
+async function findMovieById(req: Request, res: Response, id : string){
+    const movieById = await movieRepository.findMovieById(id);
+    if (movieById.rowCount !== 1) {
+      return res.sendStatus(404);
+    }
+}
