@@ -64,7 +64,7 @@ export function moviesList() {
 export function updateReview(id, newReview) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            return [2 /*return*/, connection.query("UPDATE movies SET review=$1 WHERE id=$2;", [newReview.review, id])];
+            return [2 /*return*/, connection.query("UPDATE movies SET review=$1 WHERE id=$2;", [newReview, id])];
         });
     });
 }
@@ -72,7 +72,7 @@ export function updateReview(id, newReview) {
 export function updateRate(id, newRate) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            return [2 /*return*/, connection.query("UPDATE movies SET rate=$1 WHERE id=$2", [newRate.rate, id])];
+            return [2 /*return*/, connection.query("UPDATE movies SET rate=$1 WHERE id=$2", [newRate, id])];
         });
     });
 }

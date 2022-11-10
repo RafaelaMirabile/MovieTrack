@@ -7,22 +7,22 @@ export async function insertMovie(movie: movieProtocols.Movie) {
     return result;
 };
 
-export async function findMovie(movie: movieProtocols.Movie): Promise<QueryResult<movieProtocols.Movie>> {
+export async function findMovie(movie: movieProtocols.Movie): Promise<QueryResult<movieProtocols.MovieEntity>> {
     return connection.query(`SELECT title FROM movies WHERE title=$1;`, [movie.title]);
 };
 
-export async function moviesList(): Promise<QueryResult<movieProtocols.Movie>> {
+export async function moviesList(): Promise<QueryResult<movieProtocols.MovieEntity>> {
     return connection.query(`SELECT * FROM movies;`);
 };
 
-export async function updateReview(id: string, newReview: movieProtocols.Review) {
-    return connection.query(`UPDATE movies SET review=$1 WHERE id=$2;`, [newReview.review, id]);
+export async function updateReview(id: string, newReview:string) {
+    return connection.query(`UPDATE movies SET review=$1 WHERE id=$2;`, [newReview, id]);
 };
 
-export async function updateRate(id: string, newRate: movieProtocols.Rate) {
-    return connection.query(`UPDATE movies SET rate=$1 WHERE id=$2`, [newRate.rate, id]);
+export async function updateRate(id: string, newRate: string) {
+    return connection.query(`UPDATE movies SET rate=$1 WHERE id=$2`, [newRate, id]);
 };
-export async function findMovieById(id : string) : Promise <QueryResult<movieProtocols.Movie>>{
+export async function findMovieById(id : string) : Promise <QueryResult<movieProtocols.MovieEntity>>{
     return connection.query(`SELECT * FROM movies WHERE id=$1`,[id]);
 };
 
@@ -30,7 +30,7 @@ export async function deleteUniqueMovie(id :string){
     return connection.query(`DELETE FROM movies WHERE id=$1`,[id]);
 };
 
-export async function listSameGenreMovies(genre: string): Promise<QueryResult<movieProtocols.Movie>>{
+export async function listSameGenreMovies(genre: string): Promise<QueryResult<movieProtocols.MovieEntity>>{
     return connection.query(`SELECT * FROM movies WHERE genre=$1`,[genre]);
 }
 

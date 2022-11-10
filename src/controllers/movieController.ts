@@ -30,7 +30,7 @@ export async function insertOne(req: Request, res: Response) {
 
 export async function writeReview(req: Request, res: Response) {
     const id = req.params.movieId as string;
-    const newReview = req.body as movieProtocols.Review;
+    const newReview = req.body.review as string;
     try {
         await movieRepository.updateReview(id, newReview);
         return res.status(200).send(`review updated successfully`);
@@ -42,7 +42,7 @@ export async function writeReview(req: Request, res: Response) {
 
 export async function updateRate(req: Request, res: Response) {
     const id = req.params.movieId as string;
-    const newRate = req.body as movieProtocols.Rate;
+    const newRate = req.body.rate as string;
     try {
         await movieRepository.updateRate(id, newRate);
         return res.status(200).send(`rate updated successfully`);

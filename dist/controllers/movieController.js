@@ -93,7 +93,7 @@ export function writeReview(req, res) {
             switch (_a.label) {
                 case 0:
                     id = req.params.movieId;
-                    newReview = req.body;
+                    newReview = req.body.review;
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -118,7 +118,7 @@ export function updateRate(req, res) {
             switch (_a.label) {
                 case 0:
                     id = req.params.movieId;
-                    newRate = req.body;
+                    newRate = req.body.rate;
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
