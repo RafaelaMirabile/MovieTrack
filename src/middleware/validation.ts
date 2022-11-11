@@ -4,8 +4,9 @@ import * as  schemas from "../schemas/movieSchema.js";
 
  export function validateMovie(req:Request,res:Response,next:NextFunction){
     const newMovie = req.body as movieProtocols.Movie;
-    const {error} = schemas.movieRateSchema.validate(newMovie);
+    const {error} = schemas.movieSchema.validate(newMovie);
     if(error){
+        console.log(error);
         return res.status(422).send(error.details.map(value=> value.message));
     }
     next();

@@ -8,10 +8,5 @@ export type MovieEntity = {
 	create_at: Date
 };
 
-export type Movie = Omit<MovieEntity,"id"|"rate"|"review"|"create_at">
-
-
-
-
-
+export type Movie = Omit<MovieEntity,"id"|"create_at"|"rate">
 

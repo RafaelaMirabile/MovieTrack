@@ -29,8 +29,8 @@ CREATE TABLE public.movies (
     title text NOT NULL,
     banner text NOT NULL,
     genre text NOT NULL,
-    rate numeric DEFAULT 0,
-    review text DEFAULT 'There is no review yet'::text,
+    rate numeric DEFAULT 0 NOT NULL,
+    review text,
     "createAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -66,24 +66,14 @@ ALTER TABLE ONLY public.movies ALTER COLUMN id SET DEFAULT nextval('public.movie
 -- Data for Name: movies; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.movies VALUES (2, 'Matrix Reloaded', 'https://m.media-amazon.com/images/I/51vdqg4R0+L.jpg', 'ação', 0, 'There is no review yet', '2022-11-09 15:10:39.973423');
-INSERT INTO public.movies VALUES (3, 'Matrix Revolutions', 'https://cineclick-static.flixmedia.cloud/1280/processed/69/1080x1620_1594393600.webp', 'ação', 0, 'There is no review yet', '2022-11-09 20:52:10.700744');
-INSERT INTO public.movies VALUES (1, 'Matrix', 'https://m.media-amazon.com/images/I/51unGrb-AAL._AC_.jpg', 'ação', 10, 'o começo da melhor trilogia da sétima arte', '2022-11-09 15:06:29.491815');
+INSERT INTO public.movies VALUES (1, 'teste8', 'lala8', 'string', 10, 'ok', '2022-11-11 11:28:10.703338');
 
 
 --
 -- Name: movies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.movies_id_seq', 3, true);
-
-
---
--- Name: movies movies_banner_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.movies
-    ADD CONSTRAINT movies_banner_key UNIQUE (banner);
+SELECT pg_catalog.setval('public.movies_id_seq', 2, true);
 
 
 --
@@ -92,14 +82,6 @@ ALTER TABLE ONLY public.movies
 
 ALTER TABLE ONLY public.movies
     ADD CONSTRAINT movies_pkey PRIMARY KEY (id);
-
-
---
--- Name: movies movies_title_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.movies
-    ADD CONSTRAINT movies_title_key UNIQUE (title);
 
 
 --

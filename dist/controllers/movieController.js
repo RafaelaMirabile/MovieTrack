@@ -88,24 +88,30 @@ export function insertOne(req, res) {
 ;
 export function writeReview(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var id, newReview, error_3;
+        var id, newReview, movieById, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     id = req.params.movieId;
                     newReview = req.body.review;
-                    _a.label = 1;
+                    return [4 /*yield*/, movieRepository.findMovieById(id)];
                 case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, movieRepository.updateReview(id, newReview)];
+                    movieById = _a.sent();
+                    if (movieById.rowCount === 0) {
+                        return [2 /*return*/, res.sendStatus(404)];
+                    }
+                    _a.label = 2;
                 case 2:
+                    _a.trys.push([2, 4, , 5]);
+                    return [4 /*yield*/, movieRepository.updateReview(id, newReview)];
+                case 3:
                     _a.sent();
                     return [2 /*return*/, res.status(200).send("review updated successfully")];
-                case 3:
+                case 4:
                     error_3 = _a.sent();
                     console.log(error_3);
                     return [2 /*return*/, res.sendStatus(500)];
-                case 4: return [2 /*return*/];
+                case 5: return [2 /*return*/];
             }
         });
     });
@@ -113,24 +119,30 @@ export function writeReview(req, res) {
 ;
 export function updateRate(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var id, newRate, error_4;
+        var id, newRate, movieById, error_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     id = req.params.movieId;
                     newRate = req.body.rate;
-                    _a.label = 1;
+                    return [4 /*yield*/, movieRepository.findMovieById(id)];
                 case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, movieRepository.updateRate(id, newRate)];
+                    movieById = _a.sent();
+                    if (movieById.rowCount === 0) {
+                        return [2 /*return*/, res.sendStatus(404)];
+                    }
+                    _a.label = 2;
                 case 2:
+                    _a.trys.push([2, 4, , 5]);
+                    return [4 /*yield*/, movieRepository.updateRate(id, newRate)];
+                case 3:
                     _a.sent();
                     return [2 /*return*/, res.status(200).send("rate updated successfully")];
-                case 3:
+                case 4:
                     error_4 = _a.sent();
                     console.log(error_4);
                     return [2 /*return*/, res.sendStatus(5000)];
-                case 4: return [2 /*return*/];
+                case 5: return [2 /*return*/];
             }
         });
     });
@@ -138,29 +150,23 @@ export function updateRate(req, res) {
 ;
 export function deleteMovie(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var id, movieById, error_5;
+        var id, error_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     id = req.params.movieId;
                     _a.label = 1;
                 case 1:
-                    _a.trys.push([1, 4, , 5]);
-                    return [4 /*yield*/, movieRepository.findMovieById(id)];
-                case 2:
-                    movieById = _a.sent();
-                    if (movieById.rowCount !== 1) {
-                        res.sendStatus(404);
-                    }
+                    _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, movieRepository.deleteUniqueMovie(id)];
-                case 3:
+                case 2:
                     _a.sent();
-                    return [2 /*return*/, res.status(204).send("movie deleted")];
-                case 4:
+                    return [2 /*return*/, res.status(204).send('movie deleted')];
+                case 3:
                     error_5 = _a.sent();
                     console.log(error_5);
                     return [2 /*return*/, res.status(500).send(error_5.detail)];
-                case 5: return [2 /*return*/];
+                case 4: return [2 /*return*/];
             }
         });
     });

@@ -39,7 +39,7 @@ export function insertMovie(movie) {
     return __awaiter(this, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
-            result = connection.query("INSERT INTO movies (title,banner,genre) VALUES ($1,$2,$3);", [movie.title, movie.banner, movie.genre]);
+            result = connection.query("INSERT INTO movies (title,banner,genre,review) VALUES ($1,$2,$3,$4);", [movie.title, movie.banner, movie.genre, movie.review]);
             return [2 /*return*/, result];
         });
     });
@@ -77,14 +77,6 @@ export function updateRate(id, newRate) {
     });
 }
 ;
-export function findMovieById(id) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            return [2 /*return*/, connection.query("SELECT * FROM movies WHERE id=$1", [id])];
-        });
-    });
-}
-;
 export function deleteUniqueMovie(id) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
@@ -97,6 +89,13 @@ export function listSameGenreMovies(genre) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             return [2 /*return*/, connection.query("SELECT * FROM movies WHERE genre=$1", [genre])];
+        });
+    });
+}
+export function findMovieById(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, connection.query("SELECT * FROM movies WHERE id=$1", [id])];
         });
     });
 }
