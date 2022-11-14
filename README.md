@@ -64,10 +64,12 @@ movieId is the id provided from the database.
 The key value is a string.
 movieId is the id provided from the database.
 
-5. get('/listMovies');
+5. get('/listMovies')
+
 This path has a query parameter. To test this router the URL path is 'listMovies?genre='. You can choose the genre that you classified your movies.
 
 6.delete('/:movieId')
+
 movieId is the id provided from the database.
 
 
