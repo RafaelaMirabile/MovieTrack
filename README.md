@@ -28,6 +28,7 @@ CREATE DATABASE database_name;
 ```
 
 7. Copy the file dump.sql to create the table
+
 8. Create `.env` file using the `.env.example` file;
 
 ## Implemented HTTP routers methods
