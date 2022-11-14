@@ -13,5 +13,5 @@ export const movieReviewSchema = joi.object({
 });
 
 export const movieRateSchema = joi.object({
-    rate: joi.number().required()
+    rate: joi.number().required().min(0).max(10)
 })
