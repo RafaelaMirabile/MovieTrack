@@ -9,6 +9,7 @@ Back-end for MovieTrack, an app that organize your movies wishlist and also let 
 ## How to run for development
 
 1.Clone this repository
+
 2.Install all the dependencies 
 
 ```bash
